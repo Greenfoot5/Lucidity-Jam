@@ -56,10 +56,10 @@ public class PlayerMovement : MonoBehaviour
         // Vertical Movement
         if (Input.GetAxis("Vertical") > 0 && !_isJumping && _isGrounded)
         {
-            var movementY = Input.GetAxis("Vertical") * _lucidityStats.jumpPower * Time.deltaTime;
             _rb.AddForce(Vector2.up * _lucidityStats.jumpPower, ForceMode2D.Impulse);
             _isJumping = true;
         }
+        // Reset isJumping flag
         else if ((Input.GetAxis("Vertical") == 0 ||  _isGrounded) && _isJumping)
         {
             _isJumping = false;
