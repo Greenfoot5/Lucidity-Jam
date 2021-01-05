@@ -14,10 +14,18 @@ public class PlayerMovement : MonoBehaviour
     private bool _isGrounded;
     private bool _isJumping;
 
+    public static PlayerMovement Instance;
+
     void Awake()
     {
         _lucidityStats = lucidityState.GetComponent<LucidityStats>();
         _rb = transform.GetComponent<Rigidbody2D>();
+        if (Instance != null)
+        {
+            Debug.LogError("More than one player movement in scene!");
+            return;
+        }
+        Instance = this;
     }
 
     public void SetLucidityState(GameObject newState)
@@ -26,6 +34,11 @@ public class PlayerMovement : MonoBehaviour
         newState.SetActive(true);
         lucidityState = newState;
         _lucidityStats = lucidityState.GetComponent<LucidityStats>();
+    }
+
+    public GameObject GetLucidityState()
+    {
+        return lucidityState;
     }
 
     public void FixedUpdate()
