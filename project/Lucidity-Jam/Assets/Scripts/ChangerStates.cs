@@ -18,11 +18,11 @@ public class ChangerStates : MonoBehaviour
         Instance = this;
     }
 
-    public void UpdateChangers()
+    public void UpdateChangers(GameObject newState)
     {
-        foreach (GameObject stateChanger in stateChangers)
+        foreach (var stateChanger in stateChangers)
         {
-            if (PlayerMovement.Instance.GetLucidityState() == stateChanger.GetComponent<StateChanger>().newState)
+            if (PlayerMovement.Instance.GetLucidityState() == newState)
             {
                 stateChanger.GetComponent<SpriteRenderer>().color = deactivatedColor;
             }

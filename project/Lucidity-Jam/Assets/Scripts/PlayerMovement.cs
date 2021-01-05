@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     public void FixedUpdate()
     {
         // Check if we're grounded
-        _isGrounded = Physics2D.OverlapCircle (transform.position, 0.2f, groundLayer); 
+        _isGrounded = Physics2D.OverlapCircle (transform.position, groundRange, groundLayer); 
         
         // Horizontal movement
         if (Input.GetAxis("Horizontal") != 0)
@@ -56,10 +56,10 @@ public class PlayerMovement : MonoBehaviour
         // Vertical Movement
         if (Input.GetAxis("Vertical") > 0 && !_isJumping && _isGrounded)
         {
-            var movementY = Input.GetAxis("Vertical") * _lucidityStats.jumpPower * Time.deltaTime;
             _rb.AddForce(Vector2.up * _lucidityStats.jumpPower, ForceMode2D.Impulse);
             _isJumping = true;
         }
+        // Reset isJumping flag
         else if ((Input.GetAxis("Vertical") == 0 ||  _isGrounded) && _isJumping)
         {
             _isJumping = false;

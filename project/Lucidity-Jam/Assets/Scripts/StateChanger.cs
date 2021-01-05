@@ -9,7 +9,7 @@ public class StateChanger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerMovement>().SetLucidityState(newState);
-            ChangerStates.Instance.UpdateChangers();
+            ChangerStates.Instance.UpdateChangers(newState);
         }
     }
 }
